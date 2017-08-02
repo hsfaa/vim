@@ -1,18 +1,26 @@
-"开启文件类型侦测
 filetype on
-"根据侦测到的不同类型加载对应的插件
 filetype plugin on
-"自动缩进
 filetype indent on
-"开启语法高亮功能
 syntax enable
-"允许用指定语法高亮配色方案替换默认方案
 syntax on"
 colorscheme darkblue
+set shiftwidth=4
+set softtabstop=4 " 使得按退格键时可以一次删掉 4 个空格
+set nobackup " 覆盖文件时不备份
 set nocompatible "禁用vi兼容模式
 set incsearch "开启增量搜索
 set ignorecase "搜索忽略大小写
 set wildmenu "vim命令自动补全
+set ignorecase smartcase " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
+set nowrapscan " 禁止在搜索到文件两端时重新搜索
+set incsearch " 输入搜索内容时就显示搜索结果
+set foldenable " 开始折叠
+set foldmethod=syntax " 设置语法折叠
+set foldcolumn=0 " 设置折叠区域的宽度
+setlocal foldlevel=1 " 设置折叠层数为
+set foldclose=all " 设置为自动关闭折叠
+nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+" 用空格键来开关折叠
 set autoread "文件自动更新
 set gcr=a:block-blinkon0 "禁止光标闪烁
 set laststatus=2 "总是显示状态栏
@@ -31,14 +39,13 @@ if has("autocmd")
       endif
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
-Bundle 'gmarik/vundle'
+Bundle 'vundlevim/vundle'
 Bundle 'majutsushi/tagbar'
 nmap <Leader>tb :TagbarToggle<CR>        "快捷键设置
 let g:tagbar_ctags_bin='ctags'            "ctags程序的路径
 let g:tagbar_width=30                    "窗口宽度的设置
 map <F3> :Tagbar<CR>
 autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
-"如果是c语言的程序的话，tagbar自动开启
 Bundle 'scrooloose/nerdtree'
 let NERDTreeWinPos='right'
 let NERDTreeWinSize=30
@@ -81,3 +88,7 @@ let OmniCpp_ShowPrototypeInAbbr=1
 let OmniCpp_SelectFirstItem = 2
 set tags+=/home/project/project_2/tags
 set tags+=/home/project/project_1/tags
+Bundle 'vim-scripts/vim-auto-save'
+let g:auto_save = 1  " enable AutoSave on Vim startup
+Bundle 'Valloric/YouCompleteMe'
+set encoding=UTF-8
