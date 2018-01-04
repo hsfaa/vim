@@ -91,4 +91,4 @@ set tags+=/home/project/project_1/tags
 Bundle 'vim-scripts/vim-auto-save'
 let g:auto_save = 1  " enable AutoSave on Vim startup
 Bundle 'Valloric/YouCompleteMe'
-set encoding=UTF-8
+
