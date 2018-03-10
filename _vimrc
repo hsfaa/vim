@@ -34,3 +34,60 @@ set expandtab " 将制表符扩展为空格
 set tabstop=4 " 制表符占用空格数
 set shiftwidth=4 " 设置格式化时制表符占用空格数
 set softtabstop=4 " 让 vim 把连续数量的空格视为一个制表符
+if has("autocmd")
+	      au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+      endif
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin('$VIM/vimfiles/bundle/')
+Bundle 'vundlevim/vundle'
+Bundle 'majutsushi/tagbar'
+nmap <Leader>tb :TagbarToggle<CR>        "快捷键设置
+let g:tagbar_ctags_bin='ctags'            "ctags程序的路径
+let g:tagbar_width=30                    "窗口宽度的设置
+map <F3> :Tagbar<CR>
+autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
+Bundle 'scrooloose/nerdtree'
+let NERDTreeWinPos='right'
+let NERDTreeWinSize=30
+map <F2> :NERDTreeToggle<CR>
+Bundle 'fholgado/minibufexpl.vim'
+let g:miniBufExplMapWindowNavVim = 1   
+let g:miniBufExplMapWindowNavArrows = 1   
+let g:miniBufExplMapCTabSwitchBufs = 1   
+let g:miniBufExplModSelTarget = 1  
+let g:miniBufExplMoreThanOne=0
+
+map <F11> :MBEbp<CR>
+map <F12> :MBEbn<CR>
+Bundle 'octol/vim-cpp-enhanced-highlight'
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_experimental_template_highlight = 1
+Bundle 'jiangmiao/auto-pairs'
+Bundle 'vim-syntastic/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+Bundle 'vim-scripts/OmniCppComplete'
+set nocp    
+filetype plugin on   
+set completeopt=menu,menuone  
+let OmniCpp_MayCompleteDot=1 
+let OmniCpp_MayCompleteArrow=1
+let OmniCpp_MayCompleteScope=1
+let OmniCpp_NamespaceSearch=1
+let OmniCpp_GlobalScopeSearch=1  
+let OmniCpp_DefaultNamespace=["std"]  
+let OmniCpp_ShowPrototypeInAbbr=1
+let OmniCpp_SelectFirstItem = 2
+set tags+=/home/project/project_2/tags
+set tags+=/home/project/project_1/tags
+Bundle 'vim-scripts/vim-auto-save'
+let g:auto_save = 1  " enable AutoSave on Vim startup
+Bundle 'Valloric/YouCompleteMe'
